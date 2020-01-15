@@ -1,6 +1,22 @@
 cudnn.torch
 ===========
 
+__* forked from gkanno/cudnn.torch, for CUDNN v7.6.x-compatible FFI definition.__
+
+## HOW TO INSTALL cudnn.torch for CUDNN v7.6.x
+```
+$ git clone https://github.com/dalgarak/cudnn.torch.git
+$ cd cudnn.torch
+$ git checkout origin/R7
+$ luarocks make cudnn-scm-1.rockspec
+
+# test
+(optional) $ export CUDNN_PATH=<your libcudnn.so.7 file path>
+$ th test/test.lua
+```
+
+***
+
 Torch7 FFI bindings for NVIDIA cuDNN (R5) kernels!
 
 Modules are API compatible their [`nn`](https://github.com/torch/nn) equivalents. Fully unit-tested against `nn` implementations.
