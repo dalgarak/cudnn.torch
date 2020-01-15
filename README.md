@@ -15,6 +15,8 @@ $ luarocks make cudnn-scm-1.rockspec
 $ th test/test.lua
 ```
 
+__WARNING: if your code uses "cudnn.C.CUDNN_POOLING_AVERAGE", you must replace it to "cudnn.C.CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING" or "cudnn.C.CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING". "cudnn.C.CUDNN_POOLING_AVERAGE" was deprecated in CUDNN v7.6.x.__
+
 ***
 
 Torch7 FFI bindings for NVIDIA cuDNN (R5) kernels!
