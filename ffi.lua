@@ -2799,7 +2799,7 @@ cudnnSetRNNDescriptor_v5(cudnnRNNDescriptor_t rnnDesc,
 
 local CUDNN_PATH = os.getenv('CUDNN_PATH')
 if CUDNN_PATH then
-    io.stderr:write('Found Environment variable CUDNN_PATH = ' .. CUDNN_PATH)
+    io.stderr:write('Found Environment variable CUDNN_PATH = ' .. CUDNN_PATH .. '\n')
     cudnn.C = ffi.load(CUDNN_PATH)
 else
     local libnames = {'libcudnn.so.7', 'libcudnn.7.dylib', 'cudnn64_7.dll'}

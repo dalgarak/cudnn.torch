@@ -525,6 +525,10 @@ function cudnntest.SpatialMaxPooling()
    testLayer(sconv, gconv, input, gradOutput, scale, false, false)
 end
 
+local function has_cudnn_pooling_average()
+  return (cudnn.C.CUDNN_POOLING_AVERAGE ~= nil)
+end
+
 function cudnntest.SpatialAveragePooling()
    local bs = math.random(1,32)
    local from = math.random(1,32)
@@ -551,7 +555,12 @@ function cudnntest.SpatialAveragePooling()
    testLayer(sconv, gconv, input, gradOutput, scale, false, true)
    testLayer(sconv, gconv, input, gradOutput, scale, false, false)
 
-   mytester:assert(cudnn.C.CUDNN_POOLING_AVERAGE ~= nil, 'back-compat broken')
+   if not pcall(has_cudnn_pooling_average) then
+     mytester:_warning('WARNING: backward-compatibility was broken in CUDNN version ' 
+      .. tostring(tonumber(cudnn.C.cudnnGetVersion())
+      .. ', replace cudnn.C.CUDNN_POOLING_AVERAGE to'
+      .. ' cudnn.C.CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING.'))
+   end
 end
 
 local function nonlin(nonlin, inplace)
